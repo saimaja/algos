@@ -62,12 +62,43 @@ class SLL{
         this.length++;
         return this;
     }
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        let counter = 0;
+        let current = this.head;
+        while(counter !== index){
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+    set(index, value){
+        if(!this.get(index)) return false;
+        if(this.get(index)) {
+            this.get(index).val = value;
+        }
+        return true;
+    }
+    insert(index, value){
+        let newNode = new Node(value);
+        if(index > this.length || index < 0) return false;
+        if(index === this.length) return !!this.push(value);
+        if (index === 0) return !!this.unshift(value);
+        let previous = this.get(index - 1)
+        let temp = previous.next
+        previous.next = newNode;
+        newNode.next = temp;
+        this.length++;
+        return true;
+    }
 }
 
 let list = new SLL()
 list.push('hi')
 list.push('!')
-list.unshift('hey')
-list.unshift('hello')
+list.push('hey')
+list.push('hello')
+
 // list.shift()
+console.log(list.insert(0, 'first'))
 console.log(list)
