@@ -33,7 +33,7 @@ class SLL{
         }
         this.tail = newTail;
         this.tail.next = null;
-        this.length --;
+        this.length--;
         if(this.length === 0){
             this.head = null;
             this.tail = null;
@@ -44,14 +44,17 @@ class SLL{
         if(!this.head) return undefined;
         let currentHead = this.head;
         this.head = currentHead.next;
-        this.length --;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
         return currentHead;
     }
     unshift(val){
         let newNode = new Node(val);
         if(!this.head) {
             this.head = newNode;
-            this.tail = this.head;
+            this.tail = newNode;
         } else {
         newNode.next = this.head;
         this.head = newNode;
@@ -65,4 +68,6 @@ let list = new SLL()
 list.push('hi')
 list.push('!')
 list.unshift('hey')
+list.unshift('hello')
+// list.shift()
 console.log(list)
