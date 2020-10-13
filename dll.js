@@ -53,6 +53,19 @@ class DLL {
         this.length--;
         return oldHead;
     }
+    unshift(val) {
+        let newNode = new Node(val)
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
 }
 
 let dll = new DLL();
@@ -60,5 +73,5 @@ dll.push(13)
 dll.push(14)
 dll.push(15)
 dll.push(16)
-dll.shift()
+dll.unshift(12)
 console.log(dll)
