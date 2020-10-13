@@ -118,8 +118,12 @@ class DLL {
         if(index === this.length - 1) return this.pop();
         
         let removedNode = this.get(index);
-        removedNode.prev.next = removedNode.next;
-        removedNode.next.prev = removedNode.prev;
+        let beforeNode = removedNode.prev;
+        let afterNode = removedNode.next;
+        beforeNode.next = afterNode;
+        afterNode.prev = beforeNode;
+        // removedNode.prev.next = removedNode.next;
+        // removedNode.next.prev = removedNode.prev;
         removedNode.next = null;
         removedNode.prev = null;
         
