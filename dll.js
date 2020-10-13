@@ -1,5 +1,5 @@
-class Node { 
-    constructor(val){
+class Node {
+    constructor(val) {
         this.val = val;
         this.next = null;
         this.prev = null;
@@ -7,28 +7,28 @@ class Node {
 }
 
 class DLL {
-    constructor(){
+    constructor() {
         this.head = null;
         this.tail = null;
         this.length = 0;
     }
-    push(val){
+    push(val) {
         let newNode = new Node(val)
-        if(!this.head){
+        if (!this.head) {
             this.head = newNode;
             this.tail = this.head;
         } else {
-        this.tail.next = newNode;
-        newNode.prev = this.tail;
-        this.tail = newNode;
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode;
         }
         this.length++;
         return this;
     }
-    pop(){
-        if(!this.head) return undefined;
+    pop() {
+        if (!this.head) return undefined;
         let poppedTail = this.tail;
-        if(this.length === 1){
+        if (this.length === 1) {
             this.head = null;
             this.tail = null;
         } else {
@@ -39,10 +39,10 @@ class DLL {
         this.length--
         return poppedTail;
     }
-    shift(){
-        if(!this.head) return undefined;
+    shift() {
+        if (!this.head) return undefined;
         let oldHead = this.head;
-        if(this.length === 1) {
+        if (this.length === 1) {
             this.head = null;
             this.tail = null;
         } else {
@@ -55,7 +55,7 @@ class DLL {
     }
     unshift(val) {
         let newNode = new Node(val)
-        if(!this.head) {
+        if (!this.head) {
             this.head = newNode;
             this.tail = newNode;
         } else {
@@ -66,6 +66,26 @@ class DLL {
         this.length++;
         return this;
     }
+    get(index) {
+        if (index < 0 || index >= this.length) return null;
+        let count, current;
+        if (index <= this.length / 2) {
+            count = 0;
+            current = this.head;
+            while (count !== index) {
+                current = current.next;
+                count++;
+            }
+        } else {
+            count = this.length - 1;
+            current = this.tail;
+            while (count !== index) {
+                current = current.prev;
+                count--;
+            }
+        }
+        return current;
+    }
 }
 
 let dll = new DLL();
@@ -73,5 +93,5 @@ dll.push(13)
 dll.push(14)
 dll.push(15)
 dll.push(16)
-dll.unshift(12)
-console.log(dll)
+
+console.log(dll.get(-1))
