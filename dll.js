@@ -94,6 +94,23 @@ class DLL {
         }
         return false;
     }
+    insert(index, val){
+        if(index < 0 || index >= this.length) return false;
+        //!! (forced boolean) returns true if inserted at beginning or end
+        if(index === 0) return !!this.unshift(val);
+        if(index === this.length) return !!this.push(val); 
+        
+        let newNode = new Node(val);
+        let beforeNode = this.get(index-1);
+        let afterNode = beforeNode.next;
+        
+        beforeNode.next = newNode;
+        newNode.prev = beforeNode;
+        newNode.next = afterNode;
+        afterNode.prev = newNode;
+        this.length++;
+        return true;
+    }
 }
 
 let dll = new DLL();
@@ -102,5 +119,5 @@ dll.push(14)
 dll.push(15)
 dll.push(16)
 
-console.log(dll.set(1, 90))
+console.log(dll.insert(0, 90))
 console.log(dll)
