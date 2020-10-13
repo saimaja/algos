@@ -86,6 +86,14 @@ class DLL {
         }
         return current;
     }
+    set(index, val) {
+        let foundNode = this.get(index);
+        if(foundNode != null) {
+            foundNode.val = val;
+            return true;
+        }
+        return false;
+    }
 }
 
 let dll = new DLL();
@@ -94,4 +102,5 @@ dll.push(14)
 dll.push(15)
 dll.push(16)
 
-console.log(dll.get(-1))
+console.log(dll.set(1, 90))
+console.log(dll)
